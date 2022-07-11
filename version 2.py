@@ -18,7 +18,7 @@ def add_time(start,duration):
     hrs = 0
     mins = 0
 
-    
+    #"11:30 AM", "2:32"
     if duration_mins == 0 :
         mins = start_min
     else:
@@ -30,25 +30,24 @@ def add_time(start,duration):
                 #if the minutes pass 60, subtract that number, then add an hour                    
                 hrs = hrs + 1
                 mins = mins - 60
-            print(mins)
+
+    #next part (hours) nees work            
     if duration_hours == 0: 
         hrs = start_hour + hrs
     else:
+        hrs = start_hour + hrs
+        return hrs
         for hour in range(duration_hours):
             hr_count = hr_count + 1
-            if hrs == 0:
-                hrs = start_hour +1
-            else:
-                hrs = hrs + 1
-                if hrs == 12:
-                    if tod == "PM":       #if its 12 PM
-                        tod = "AM"        #make it 12 AM
-                        day = "Next day"  # move on to the next day 
-                    elif tod =="AM":      # if its 12 AM  
-                        tod = "PM"        #switch it to PM
-                    print(hrs,tod)
-                if hrs > 12:
-                    hrs = hrs - 12     # if hours is 13 or higher  , take 12 out of it
+            hrs = hrs + 1
+            if hrs == 12:
+                if tod == "PM":       #if its 12 PM
+                    tod = "AM"        #make it 12 AM
+                    day = "Next day"  # move on to the next day 
+                elif tod =="AM":      # if its 12 AM  
+                    tod = "PM"        #switch it to PM
+            if hrs > 12:
+                hrs = hrs - 12     # if hours is 13 or higher  , take 12 out of it
             if hr_count == 24:
                 day_count = day_count + 1
                 hr_count = 0
@@ -71,7 +70,7 @@ def add_time(start,duration):
         
         
     
-print(add_time("3:30 PM", "0:50"))
+print(add_time("11:30 AM", "2:32"))
 
 times = [("3:00 PM", "3:10"),("11:30 AM", "2:32"),("11:43 AM", "00:20"),("10:10 PM", "3:30"),("11:43 PM", "24:20"),("6:30 PM", "205:12")]
 
