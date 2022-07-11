@@ -17,7 +17,7 @@ def add_time(start,duration):
     hr_count = 0
     hrs = 0
     mins = 0
-    min_count = 0
+
     
     if duration_mins == 0 :
         mins = start_min
