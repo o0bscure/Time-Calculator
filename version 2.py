@@ -72,21 +72,14 @@ def add_time(start,duration,dow=False):
                 tod = "PM"
             total_hours = total_hours - 12
     
-                
-    if not dow == False:
-        dow = dow.capitalize()
-        return dow
-                
-           
+    #fixing the timing when the hours are less than 48            
+    if day_count == 1 and tod == "AM":
+        day_count = 2       
       
     if len(str(mins)) == 1 : mins = "0" + str(mins)      
     
-    #if day_count > 1:
-             #this applies if the hour count is > 24
-        #in some cases the hour count isnt 24, meaning the day count still 0, but u still wanna move on to the next day, cuz the starting hour is 11 PM and u added for example 2 hours, meaning its the next day      
     
-    if day_count == 1 and tod == "AM":
-        day_count = 2
+
         
     if day == "next day" and not day_count > 1:
         return f"{hrs}:{mins} {tod} ({day})"     
@@ -98,7 +91,7 @@ def add_time(start,duration,dow=False):
     
         
     
-print(add_time("11:59 PM","24:05","friday"))
+print(add_time("10:10 PM", "3:30","friday"))
 
 times = [("3:00 PM", "3:10"),("11:30 AM", "2:32"),("11:43 AM", "00:20"),("10:10 PM", "3:30"),("11:43 PM", "24:20"),("6:30 PM", "205:12"),("8:16 PM", "466:02"),("11:59 PM","24:05")]
 
