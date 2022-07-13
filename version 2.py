@@ -74,20 +74,36 @@ def add_time(start,duration,dow=False):
     
     #fixing the timing when the hours are less than 48            
     if day_count == 1 and tod == "AM":
-        day_count = 2       
+        day_count = 2 
       
-    if len(str(mins)) == 1 : mins = "0" + str(mins)      
     
-    
+    if not dow == False:
+        dow = dow.capitalize()
+        if dow in weekdays:
+            print("its a legit day, proceed with calculations")
+            #my code stopped here because the day count is zero in this particular example!
+            #need to determine the position of the start day, then loop through the weekdays in order for the amount of days that pass!
+            dow_pos = weekdays.index(dow)
+            #need to start the loop from the current day onward!
+            for i in range(day_count):
+                #this loop will only work if the day count is > than 0!!
+                #the current day in this loop will start from its positon, jumping one day ahead each time this loop runs!
+                dow = weekdays[dow_pos + 1]
+                print(dow)
 
-        
-    if day == "next day" and not day_count > 1:
-        return f"{hrs}:{mins} {tod} ({day})"     
-    if day_count > 1:
-        day = f"{day_count} days later"
-        return f"{hrs}:{mins} {tod} ({day})"
-    else:
-        return f"{hrs}:{mins} {tod}"
+  
+    #looks like if its (next day) there is no need to add a day of the week
+    
+    if len(str(mins)) == 1 : mins = "0" + str(mins)  
+    #this next block will return the proper output if the third argument(day) isn't given
+    if dow is False:
+        if day == "next day" and not day_count > 1:
+            return f"{hrs}:{mins} {tod} ({day})"     
+        if day_count > 1:
+            day = f"{day_count} days later"
+            return f"{hrs}:{mins} {tod} ({day})"
+        else:
+            return f"{hrs}:{mins} {tod}"
     
         
     
@@ -97,7 +113,17 @@ times = [("3:00 PM", "3:10"),("11:30 AM", "2:32"),("11:43 AM", "00:20"),("10:10 
 
 #worry about the tod later.
 #time to handle the days
-#NEED TO EXTEND THE DAYS BY 1, my results are always missing a day
+
+
+
+#NEED TO EXTEND THE DAYS BY 1, my results are always missing a day!
+#NEED TO TAKE A CLOSER LOOK AT THE DAY COUNT CALCULATIONS, MAKE SURE ITS ACCURATE!
+#THERE IS A SLIGHT ISSUE IF THE TIME ADVENCES A DAY YET THE DAY COUNT IS STILL ZERO, CUZ THE DAY COUNTER USUALLY STARTS AFTER 24 HOURS (i got it handled by a sloppy if statement)
+
+
+
+
+
 
 
 #YOU NEED TO ADD A DAY IF ITS 11 PM + 2 HOURS OR SOMETHING!             
