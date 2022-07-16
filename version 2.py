@@ -46,7 +46,6 @@ def add_time(start,duration,dow=False):
                     day = "next day"  # move on to the next day 
                 elif tod =="AM":      # if its 12 AM  
                     tod = "PM"      #switch it to PM
-                
     else:
         hrs = start_hour + hrs
         #the hours here is 12, the start hours is 11, then only added an extra hours vuz of the minutes.
@@ -61,6 +60,7 @@ def add_time(start,duration,dow=False):
                 hr_count = 0
             if tod == "PM" and hrs > 11 and day_count < 1:
                 day_count = day_count + 1
+    print(total_hours)
 
 
     while True:
@@ -88,17 +88,22 @@ def add_time(start,duration,dow=False):
             dow_pos = weekdays.index(dow)
             #need to start the loop from the current day onward!
             for i in range(day_count):
+                dow_pos = dow_pos + 1
+                if dow_pos > 6:
+                    dow_pos = 0
+                    continue
+                #if the indext goes farther than the last day of the week, change the index to the first day of the week [0] , then continue on.
                 #this loop will only work if the day count is > than 0!!
                 #the current day in this loop will start from its positon, jumping one day ahead each time this loop runs!
-                dow = weekdays[dow_pos + 1]
-                print(dow)
+            dow = weekdays[dow_pos]
 
-  
+
     #looks like if its (next day) there is no need to add a day of the week
     
     if len(str(mins)) == 1 : mins = "0" + str(mins)  
     #this next block will return the proper output if the third argument(day) isn't given
     if dow is False:
+        #if the day is next day, no need to add a day of the week, according to the project!?
         if day == "next day" and not day_count > 1:
             return f"{hrs}:{mins} {tod} ({day})"     
         if day_count > 1:
@@ -106,14 +111,24 @@ def add_time(start,duration,dow=False):
             return f"{hrs}:{mins} {tod} ({day})"
         else:
             return f"{hrs}:{mins} {tod}"
-    
+    else :
+        #added the day if statement here to make sure that if the day count is larger than a day, present the day variable properly
+        if day_count > 1:
+            day = f"{day_count} days later"
+        return f"{hrs}:{mins} {tod} {dow} {day}"
         
     
         
     
-print(add_time("11:59 PM","24:05"))
+print(add_time("11:59 PM","24:05","Saturday"))
 
 times = [("3:00 PM", "3:10"),("11:30 AM", "2:32"),("11:43 AM", "00:20"),("10:10 PM", "3:30"),("11:43 PM", "24:20"),("6:30 PM", "205:12"),("8:16 PM", "466:02"),("11:59 PM","24:05")]
+
+
+#for some reason it prints (next day) even if its 2 days after
+
+
+
 
 #worry about the tod later.
 #time to handle the days
