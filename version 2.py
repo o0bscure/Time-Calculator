@@ -59,6 +59,8 @@ def add_time(start,duration,dow=False):
             if hr_count == 24:
                 day_count = day_count + 1
                 hr_count = 0
+            if tod == "PM" and hrs > 11 and day_count < 1:
+                day_count = day_count + 1
 
 
     while True:
@@ -73,8 +75,8 @@ def add_time(start,duration,dow=False):
             total_hours = total_hours - 12
     
     #fixing the timing when the hours are less than 48            
-    if day_count == 1 and tod == "AM":
-        day_count = 2 
+    #if day_count == 1 and tod == "AM":
+        #day_count = 2 
       
     
     if not dow == False:
@@ -107,7 +109,9 @@ def add_time(start,duration,dow=False):
     
         
     
-print(add_time("10:10 PM", "3:30","friday"))
+        
+    
+print(add_time("11:59 PM","24:05"))
 
 times = [("3:00 PM", "3:10"),("11:30 AM", "2:32"),("11:43 AM", "00:20"),("10:10 PM", "3:30"),("11:43 PM", "24:20"),("6:30 PM", "205:12"),("8:16 PM", "466:02"),("11:59 PM","24:05")]
 
