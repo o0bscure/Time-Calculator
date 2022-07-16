@@ -40,12 +40,6 @@ def add_time(start,duration,dow=False):
 
     if duration_hours == 0: 
         hrs = start_hour + hrs
-        if hrs >= 12:
-                if tod == "PM":       #if its 12 PM
-                    tod = "AM"        #make it 12 AM
-                    day = "next day"  # move on to the next day 
-                elif tod =="AM":      # if its 12 AM  
-                    tod = "PM"      #switch it to PM
     else:
         hrs = start_hour + hrs
         #the hours here is 12, the start hours is 11, then only added an extra hours vuz of the minutes.
@@ -60,9 +54,8 @@ def add_time(start,duration,dow=False):
                 hr_count = 0
             if tod == "PM" and hrs > 11 and day_count < 1:
                 day_count = day_count + 1
-    print(total_hours)
 
-
+   #this loop interfered 
     while True:
         if total_hours < 12: break
         if total_hours >= 12:
@@ -74,15 +67,10 @@ def add_time(start,duration,dow=False):
                 tod = "PM"
             total_hours = total_hours - 12
     
-    #fixing the timing when the hours are less than 48            
-    #if day_count == 1 and tod == "AM":
-        #day_count = 2 
-      
-    
+
     if not dow == False:
         dow = dow.capitalize()
         if dow in weekdays:
-            print("its a legit day, proceed with calculations")
             #my code stopped here because the day count is zero in this particular example!
             #need to determine the position of the start day, then loop through the weekdays in order for the amount of days that pass!
             dow_pos = weekdays.index(dow)
@@ -103,7 +91,7 @@ def add_time(start,duration,dow=False):
     if len(str(mins)) == 1 : mins = "0" + str(mins)  
     #this next block will return the proper output if the third argument(day) isn't given
     if dow is False:
-        #if the day is next day, no need to add a day of the week, according to the project!?
+        #if the day is next day, no need to add a day of the week, according to the project!? WRONG!!!!
         if day == "next day" and not day_count > 1:
             return f"{hrs}:{mins} {tod} ({day})"     
         if day_count > 1:
@@ -112,11 +100,17 @@ def add_time(start,duration,dow=False):
         else:
             return f"{hrs}:{mins} {tod}"
     else :
-        #added the day if statement here to make sure that if the day count is larger than a day, present the day variable properly
-        if day_count > 1:
-            day = f"{day_count} days later"
-            #return the count of days only if the day count is larger than 1
-            return f"{hrs}:{mins} {tod}, {dow} ({day})"
+        #day will be None if nothig changed!
+        #in the next if statement youre saying if day isnt none .. do somehting!
+        if day != None:
+            #always start the f statements with the larges number of days 
+            if day_count > 1:
+                day = f"{day_count} days later"
+                #return the count of days only if the day count is larger than 1
+                return f"{hrs}:{mins} {tod}, {dow} ({day})"
+            if day == "next day":
+                return f"{hrs}:{mins} {tod}, {dow} ({day})"    
+            #added the day if statement here to make sure that if the day count is larger than a day, present the day variable properly
         else:
             return f"{hrs}:{mins} {tod}, {dow}"
             
@@ -124,9 +118,9 @@ def add_time(start,duration,dow=False):
     
         
     
-print(add_time("3:00 PM", "3:10","Saturday"))
+print(add_time("11:40 AM", "0:25"))
 
-times = [("3:00 PM", "3:10"),("11:30 AM", "2:32"),("11:43 AM", "00:20"),("10:10 PM", "3:30"),("11:43 PM", "24:20"),("6:30 PM", "205:12"),("8:16 PM", "466:02"),("11:59 PM","24:05")]
+times = [("3:00 PM", "3:10"),("11:30 AM", "2:32"),("11:43 AM", "00:20"),("10:10 PM", "3:30"),("11:43 PM", "24:20"),("6:30 PM", "205:12"),("8:16 PM", "466:02"),("11:59 PM","24:05"),("2:59 AM", "24:00", "saturDay"),("3:30 PM", "2:12", "Monday"),("11:40 AM", "0:25")]
 
 
 #for some reason it prints (next day) even if its 2 days after
