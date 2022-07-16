@@ -115,12 +115,16 @@ def add_time(start,duration,dow=False):
         #added the day if statement here to make sure that if the day count is larger than a day, present the day variable properly
         if day_count > 1:
             day = f"{day_count} days later"
-        return f"{hrs}:{mins} {tod} {dow} {day}"
+            #return the count of days only if the day count is larger than 1
+            return f"{hrs}:{mins} {tod}, {dow} ({day})"
+        else:
+            return f"{hrs}:{mins} {tod}, {dow}"
+            
         
     
         
     
-print(add_time("11:59 PM","24:05","Saturday"))
+print(add_time("3:00 PM", "3:10","Saturday"))
 
 times = [("3:00 PM", "3:10"),("11:30 AM", "2:32"),("11:43 AM", "00:20"),("10:10 PM", "3:30"),("11:43 PM", "24:20"),("6:30 PM", "205:12"),("8:16 PM", "466:02"),("11:59 PM","24:05")]
 
