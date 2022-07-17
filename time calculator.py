@@ -123,14 +123,6 @@ print(add_time("11:40 AM", "0:25"))
 times = [("3:00 PM", "3:10"),("11:30 AM", "2:32"),("11:43 AM", "00:20"),("10:10 PM", "3:30"),("11:43 PM", "24:20"),("6:30 PM", "205:12"),("8:16 PM", "466:02"),("11:59 PM","24:05"),("2:59 AM", "24:00", "saturDay"),("3:30 PM", "2:12", "Monday"),("11:40 AM", "0:25")]
 
 
-#for some reason it prints (next day) even if its 2 days after
-
-
-
-
-#worry about the tod later.
-#time to handle the days
-
 
 
 #NEED TO EXTEND THE DAYS BY 1, my results are always missing a day!
