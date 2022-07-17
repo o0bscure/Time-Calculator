@@ -1,0 +1,7 @@
+changes I made:
+1 - It was a mistake to calculate the hours first then then the minutes. so i prioritized the minutes loop first.
+    (gonna establish the hours baseline based on the starting hours + the hours output after caluclating the minutes)
+2 - I sit the min counter to the start minute before the loop even starts. therefore avoided having to mess with it each time the loop runs!
+3 - I simply added a minute each time the loop runs, if it passes 59 minutes (meaning 60)::
+        - simply subtract 60 out of the total mins number
+        - add 1 hour to the total hours
